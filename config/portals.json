@@ -1,0 +1,32 @@
+{
+  "portals": [
+    {
+      "name": "Naukri",
+      "url": "https://www.naukri.com",
+      "login_url": "https://www.naukri.com/nlogin/login",
+      "enabled": true,
+      "priority": 1
+    },
+    {
+      "name": "LinkedIn",
+      "url": "https://www.linkedin.com",
+      "login_url": "https://www.linkedin.com/login",
+      "enabled": true,
+      "priority": 2
+    },
+    {
+      "name": "Indeed",
+      "url": "https://in.indeed.com",
+      "login_url": "https://secure.indeed.com/account/login",
+      "enabled": true,
+      "priority": 3
+    },
+    {
+      "name": "Glassdoor",
+      "url": "https://www.glassdoor.co.in",
+      "login_url": "https://www.glassdoor.co.in/profile/login_input.htm",
+      "enabled": true,
+      "priority": 4
+    }
+  ]
+}

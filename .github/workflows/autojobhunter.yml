@@ -1,0 +1,75 @@
+name: AutoJobHunter — Run Every 6 Hours
+
+on:
+  schedule:
+    # Runs at 6:00 AM, 12:00 PM, 6:00 PM, 12:00 AM IST (UTC +5:30)
+    - cron: '30 0 * * *'   # 6:00 AM IST
+    - cron: '30 6 * * *'   # 12:00 PM IST
+    - cron: '30 12 * * *'  # 6:00 PM IST
+    - cron: '30 18 * * *'  # 12:00 AM IST
+  workflow_dispatch:        # Also allow manual trigger
+
+jobs:
+  search-jobs:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: |
+          pip install -r requirements.txt
+          playwright install chromium
+          playwright install-deps chromium
+
+      - name: Create credentials from secrets
+        run: |
+          cat > config/credentials.json << EOF
+          {
+            "email_notification": {
+              "recipient": "anshumish0606@gmail.com",
+              "sender_email": "${{ secrets.SENDER_EMAIL }}",
+              "sender_app_password": "${{ secrets.SENDER_APP_PASSWORD }}"
+            },
+            "portals": {
+              "Naukri": {
+                "username": "${{ secrets.NAUKRI_USERNAME }}",
+                "password": "${{ secrets.NAUKRI_PASSWORD }}"
+              },
+              "LinkedIn": {
+                "username": "${{ secrets.LINKEDIN_USERNAME }}",
+                "password": "${{ secrets.LINKEDIN_PASSWORD }}"
+              },
+              "Indeed": {
+                "username": "${{ secrets.INDEED_USERNAME }}",
+                "password": "${{ secrets.INDEED_PASSWORD }}"
+              },
+              "Glassdoor": {
+                "username": "${{ secrets.GLASSDOOR_USERNAME }}",
+                "password": "${{ secrets.GLASSDOOR_PASSWORD }}"
+              }
+            },
+            "gemini_api_key": "${{ secrets.GEMINI_API_KEY }}"
+          }
+          EOF
+
+      - name: Create logs directory
+        run: mkdir -p logs output/reports
+
+      - name: Run AutoJobHunter
+        run: python main.py
+
+      - name: Upload reports as artifacts
+        uses: actions/upload-artifact@v4
+        if: always()
+        with:
+          name: job-reports-${{ github.run_number }}
+          path: output/reports/
+          retention-days: 7

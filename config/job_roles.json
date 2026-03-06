@@ -1,0 +1,47 @@
+{
+  "roles": [
+    "Data Analyst Intern",
+    "Data Analyst Fresher",
+    "Business Analyst Intern",
+    "Business Analyst Fresher",
+    "Machine Learning Intern",
+    "AI ML Intern",
+    "Data Science Intern",
+    "Data Science Fresher"
+  ],
+  "experience": {
+    "min_years": 0,
+    "max_years": 0,
+    "labels": ["Fresher", "Entry Level", "Intern", "Trainee", "Apprentice", "Graduate Trainee"]
+  },
+  "job_types": [
+    "Internship",
+    "Apprenticeship",
+    "Full Time",
+    "Part Time",
+    "Freelance",
+    "Contract",
+    "Remote Contract"
+  ],
+  "work_mode": ["Remote", "Hybrid", "On-site"],
+  "locations": {
+    "primary": [
+      "Lucknow",
+      "Delhi",
+      "Noida",
+      "Gurgaon",
+      "Bangalore",
+      "Mumbai",
+      "Pune",
+      "Hyderabad",
+      "Chennai",
+      "India"
+    ],
+    "bonus": ["Global Remote", "Worldwide Remote"]
+  },
+  "filters": {
+    "date_posted": "last_7_days",
+    "exclude_experience_required": true,
+    "exclude_keywords": ["5+ years", "3+ years", "2+ years", "senior", "lead", "manager", "director"]
+  }
+}
