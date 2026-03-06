@@ -14,7 +14,7 @@ class GeminiClient:
 
     def __init__(self, api_key: str):
         genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel("gemini-1.5-flash")
+        self.model = genai.GenerativeModel("gemini-2.0-flash")
         print("✅ Gemini AI Brain initialized!")
 
     def analyze_screenshot(self, screenshot_bytes: bytes, instruction: str) -> dict:
