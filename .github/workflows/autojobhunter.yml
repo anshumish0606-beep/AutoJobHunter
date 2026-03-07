@@ -72,6 +72,7 @@ jobs:
               }
             },
             "bytez_api_key": "${{ secrets.BYTEZ_API_KEY }}"
+            "linkedin_cookies": ${{ secrets.LINKEDIN_COOKIES }}
           }
           EOF
 
