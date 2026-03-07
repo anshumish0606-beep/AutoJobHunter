@@ -177,3 +177,33 @@ class LoginAgent:
         except Exception as e:
             print(f"❌ LinkedIn error: {str(e)}")
             return False
+        
+    async def login_with_cookies(self, portal_name: str, cookies_path: str) -> bool:
+        """Login using saved cookies instead of username/password."""
+        import json
+        from pathlib import Path
+
+        cookies_file = Path(cookies_path)
+        if not cookies_file.exists():
+            print(f"   ⚠️ No cookies file found at {cookies_path}")
+            return False
+
+        try:
+            with open(cookies_file) as f:
+                cookies = json.load(f)
+
+            await self.browser.page.context.add_cookies(cookies)
+            await self.browser.goto("https://www.linkedin.com/feed/")
+            await asyncio.sleep(3)
+
+            current_url = await self.browser.get_current_url()
+            if "feed" in current_url or "mynetwork" in current_url or "jobs" in current_url:
+                print(f"✅ Logged into {portal_name} via cookies!")
+                return True
+
+            print(f"   ⚠️ Cookies expired or invalid")
+            return False
+
+        except Exception as e:
+            print(f"   ⚠️ Cookie login failed: {e}")
+            return False
