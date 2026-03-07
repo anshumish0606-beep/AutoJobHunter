@@ -1,5 +1,5 @@
 playwright==1.42.0
-google-generativeai==0.5.4
+bytez
 beautifulsoup4==4.12.3
 openpyxl==3.1.2
 requests==2.31.0

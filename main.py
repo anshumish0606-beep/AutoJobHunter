@@ -150,11 +150,11 @@ async def main():
         print("📝 Please fill in config/credentials.json with your details")
         return
 
-    # Check Gemini API key
-    gemini_key = credentials.get("gemini_api_key", "")
+    # Check Bytez API key
+    gemini_key = credentials.get("bytez_api_key", "")
     if not gemini_key or gemini_key.startswith("YOUR_"):
-        print("❌ Please add your Gemini API key to config/credentials.json")
-        print("💡 Get free key at: https://aistudio.google.com/app/apikey")
+        print("❌ Please add your Bytez API key to config/credentials.json")
+        print("💡 Get free key at: https://bytez.com")
         return
 
     # Initialize Gemini AI Brain
