@@ -71,13 +71,23 @@ async def run_portal(portal: dict, credentials: dict, job_config: dict,
 
         await browser.start()
 
-        # Step 1: Login
-        login_success = await login_agent.login(
-            portal_name=portal_name,
-            portal_url=portal["login_url"],
-            username=portal_creds["username"],
-            password=portal_creds["password"]
-        )
+        # Step 1: Login (try cookies first for LinkedIn)
+        login_success = False
+        if portal_name == "LinkedIn":
+            login_success = await login_agent.login_with_cookies(
+                portal_name=portal_name,
+                cookies_path="config/linkedin_cookies.json"
+            )
+            if login_success:
+                print("✅ LinkedIn logged in via saved cookies!")
+
+        if not login_success:
+            login_success = await login_agent.login(
+                portal_name=portal_name,
+                portal_url=portal["login_url"],
+                username=portal_creds["username"],
+                password=portal_creds["password"]
+            )
 
         if not login_success:
             print(f"❌ Skipping {portal_name} due to login failure")
