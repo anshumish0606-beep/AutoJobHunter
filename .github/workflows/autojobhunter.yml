@@ -71,7 +71,7 @@ jobs:
                 "password": "${{ secrets.GLASSDOOR_PASSWORD }}"
               }
             },
-            "gemini_api_key": "${{ secrets.GEMINI_API_KEY }}"
+            "bytez_api_key": "${{ secrets.BYTEZ_API_KEY }}"
           }
           EOF
 
