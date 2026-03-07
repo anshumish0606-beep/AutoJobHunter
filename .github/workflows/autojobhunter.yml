@@ -46,7 +46,7 @@ jobs:
 
       - name: Create credentials from secrets
         run: |
-          cat > config/credentials.json << EOF
+          cat > config/credentials.json << 'CREDSEOF'
           {
             "email_notification": {
               "recipient": "anshumish0606@gmail.com",
@@ -72,9 +72,9 @@ jobs:
               }
             },
             "bytez_api_key": "${{ secrets.BYTEZ_API_KEY }}"
-            "linkedin_cookies": ${{ secrets.LINKEDIN_COOKIES }}
           }
-          EOF
+          CREDSEOF
+          echo '${{ secrets.LINKEDIN_COOKIES }}' > config/linkedin_cookies.json
 
       - name: Create logs directory
         run: mkdir -p logs output/reports
