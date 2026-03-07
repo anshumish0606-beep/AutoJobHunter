@@ -11,7 +11,6 @@ class GeminiClient:
     """
 
     def __init__(self, api_key: str):
-<<<<<<< HEAD
         client = Bytez(api_key)
         self.model = client.model("Qwen/Qwen2-7B-Instruct")
         print("✅ Bytez AI Brain initialized!")
@@ -26,11 +25,6 @@ class GeminiClient:
         except Exception as e:
             print(f"⚠️ Bytez API error: {e}")
             return ""
-=======
-        genai.configure(api_key=api_key)
-        self.model = genai.GenerativeModel("gemini-2.0-flash")
-        print("✅ Gemini AI Brain initialized!")
->>>>>>> f452f1cd90bff27ef79da1af7c93914ff1a07f02
 
     def analyze_screenshot(self, screenshot_bytes: bytes, instruction: str) -> dict:
         return {"found": False}
